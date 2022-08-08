@@ -19,13 +19,13 @@ public class TestThirdReq
     }
 
     [Theory(DisplayName = "Deve lançar uma exceção de usuário não logado")]
-    [InlineData("Usuário não está logado")]
-    public void TestCheckBalanceWithoutLogin(string text)
+    [InlineData(0)]
+    public void TestCheckBalanceWithoutLogin(int balance)
     {        
         var instance = new Trybank();
         instance.Logged = false;
         Action act = () => instance.CheckBalance();
-        act.Should().Throw<AccessViolationException>().WithMessage(text);
+        act.Should().Throw<AccessViolationException>().WithMessage("Usuário não está logado");
 
     }
 
