@@ -2,10 +2,10 @@
 
 public class Trybank
 {
-    public static void Main(string[] args)  
-    { 
+    // public static void Main(string[] args)  
+    // { 
         
-    }
+    // }
     public bool Logged;
     public int loggedUser;
     
@@ -66,8 +66,11 @@ public class Trybank
                     {
                         throw new ArgumentException("Senha incorreta");
                     }
-                    Logged = true;
-                    loggedUser = i;
+                    else 
+                    {
+                        Logged = true;
+                        loggedUser = i;
+                    }
                 }
                 else {
                     throw new ArgumentException("Agência + Conta não encontrada");
@@ -102,7 +105,18 @@ public class Trybank
 
     public int CheckBalance()
     {
-        throw new NotImplementedException();   
+        try
+        {
+            if(Logged)
+                return Bank[loggedUser, 3];
+
+            throw new AccessViolationException("Usuário não está logado");
+        }
+        catch (Exception ex)
+        {
+            Console.Write(ex.Message);
+            throw;
+        }
     }
 
     public void Transfer(int destinationNumber, int destinationAgency, int value)
@@ -112,11 +126,49 @@ public class Trybank
 
     public void Deposit(int value)
     {
-        throw new NotImplementedException();
+        try
+        {
+            if(Logged) 
+            {
+                Bank[loggedUser, 3] = Bank[loggedUser, 3] + value;
+            }
+            else {
+                throw new AccessViolationException("Usuário não está logado");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.Write(ex.Message);
+            throw;
+        }
     }
 
     public void Withdraw(int value)
     {
-        throw new NotImplementedException();
+        try 
+        {
+            if(Logged)
+            {
+                int calc = Bank[loggedUser, 3] - value;
+                if(calc >= 0) 
+                    Bank[loggedUser, 3] = calc;
+                else {
+                   throw new InvalidOperationException("Saldo insuficiente");
+                }
+            }
+            else {
+                throw new AccessViolationException("Usuário não está logado");
+            }  
+        }
+        catch (InvalidOperationException ex)
+        {
+            Console.Write(ex.Message);
+            throw;
+        }
+        catch (AccessViolationException ex)
+        {
+            Console.Write(ex.Message);
+            throw;
+        }
     }
 }
