@@ -78,10 +78,11 @@ public class TestThirdReq
     }
 
     [Theory(DisplayName = "Deve lançar uma exceção de usuário não logado")]
-    [InlineData(0)]
-    public void TestWithdrawWithoutBalance(int value)
+    [InlineData(0, 0)]
+    public void TestWithdrawWithoutBalance(int balance, int value)
     {        
         var instance = new Trybank();
+        instance.Bank[0, 3] = balance;
         instance.Login(0, 0, 0);
         instance.Logged = false;
         instance.loggedUser = 1;
