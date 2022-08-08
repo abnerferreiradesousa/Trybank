@@ -2,6 +2,10 @@
 
 public class Trybank
 {
+    public static void Main(string[] args)  
+    { 
+        
+    }
     public bool Logged;
     public int loggedUser;
     
@@ -22,7 +26,29 @@ public class Trybank
 
     public void RegisterAccount(int number, int agency, int pass)
     {
-        throw new NotImplementedException();
+        try 
+        {
+            for (int i = 0; i < Bank.GetLength(0); i++)
+            {
+                if(Bank[i, 0] == number && Bank[i, 1] == agency)
+                {
+                    throw new ArgumentException("A conta já está sendo usada!");
+                }
+            }
+
+            Bank[registeredAccounts, 0] = number;
+            Bank[registeredAccounts, 1] = agency;
+            Bank[registeredAccounts, 2] = pass;
+            Bank[registeredAccounts, 3] = 0;
+            registeredAccounts++;
+
+            Console.Write(Bank[0, 1]);
+        }
+        catch (Exception ex)
+        {
+            Console.Write(ex.Message);
+            throw;
+        }
     }
 
     public void Login(int number, int agency, int pass)
