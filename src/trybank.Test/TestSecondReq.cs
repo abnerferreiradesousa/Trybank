@@ -58,12 +58,13 @@ public class TestSecondReq
     }
 
     [Theory(DisplayName = "Deve retornar exceção ao sair quando não está logado")]
-    [InlineData(0, 0, 0)]
-    public void TestLogoutExceptionNotLogged(int number, int agency, int pass)
+    [InlineData("Usuário não está logado")]
+    public void TestLogoutExceptionNotLogged(string text)
     {        
         var instance = new Trybank();
+        // instance.RegisterAccount(number, agency, pass);
         Action act = () => instance.Logout();
-        act.Should().Throw<AccessViolationException>().WithMessage("Usuário não está logado");
+        act.Should().Throw<AccessViolationException>().WithMessage(text);
     }
 
 }

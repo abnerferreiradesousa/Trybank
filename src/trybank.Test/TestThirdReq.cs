@@ -19,13 +19,13 @@ public class TestThirdReq
     }
 
     [Theory(DisplayName = "Deve lançar uma exceção de usuário não logado")]
-    [InlineData(0)]
-    public void TestCheckBalanceWithoutLogin(int balance)
+    [InlineData("Usuário não está logado")]
+    public void TestCheckBalanceWithoutLogin(string text)
     {        
         var instance = new Trybank();
         instance.Logged = false;
         Action act = () => instance.CheckBalance();
-        act.Should().Throw<AccessViolationException>().WithMessage("Usuário não está logado");
+        act.Should().Throw<AccessViolationException>().WithMessage(text);
 
     }
 
@@ -43,12 +43,12 @@ public class TestThirdReq
     }
 
     [Theory(DisplayName = "Deve lançar uma exceção de usuário não logado")]
-    [InlineData(0)]
+    [InlineData(10)]
     public void TestDepositWithoutLogin(int value)
     {        
         var instance = new Trybank();
         instance.Logged = false;
-        Action act = () => instance.Deposit(10);
+        Action act = () => instance.Deposit(value);
         act.Should().Throw<AccessViolationException>().WithMessage("Usuário não está logado");
     }
 
@@ -66,26 +66,26 @@ public class TestThirdReq
     }
 
     [Theory(DisplayName = "Deve lançar uma exceção de saldo insuficiente")]
-    [InlineData(0)]
+    [InlineData(10)]
     public void TestWithdrawWithoutLogin(int value)
     {        
         var instance = new Trybank();
         instance.Login(0, 0, 0);
         instance.Logged = true;
         instance.loggedUser = 1;
-        Action act = () => instance.Withdraw(10);
+        Action act = () => instance.Withdraw(value);
         act.Should().Throw<InvalidOperationException>().WithMessage("Saldo insuficiente");
     }
 
     [Theory(DisplayName = "Deve lançar uma exceção de usuário não logado")]
-    [InlineData(0, 0)]
-    public void TestWithdrawWithoutBalance(int balance, int value)
+    [InlineData(0)]
+    public void TestWithdrawWithoutBalance(int value)
     {        
         var instance = new Trybank();
         instance.Login(0, 0, 0);
         instance.Logged = false;
         instance.loggedUser = 1;
-        Action act = () => instance.Withdraw(10);
+        Action act = () => instance.Withdraw(value);
         act.Should().Throw<AccessViolationException>().WithMessage("Usuário não está logado");
     }
 }
