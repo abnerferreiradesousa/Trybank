@@ -53,12 +53,51 @@ public class Trybank
 
     public void Login(int number, int agency, int pass)
     {
-        throw new NotImplementedException();
+        try
+        {
+            if(Logged)
+                throw new AccessViolationException("Usuário já está logado");
+
+            for (int i = 0; i < Bank.GetLength(0); i += 1)
+            {
+                if(Bank[i, 0] == number && Bank[i, 1] == agency)
+                {
+                    if(Bank[i, 2] != pass)
+                    {
+                        throw new ArgumentException("Senha incorreta");
+                    }
+                    Logged = true;
+                    loggedUser = i;
+                }
+                else {
+                    throw new ArgumentException("Agência + Conta não encontrada");
+                }
+            }
+        }
+        catch(ArgumentException ex)
+        {
+            Console.Write(ex.Message);
+            throw ex;
+        }
+        
     }
 
     public void Logout()
     {
-        throw new NotImplementedException();
+        try 
+        {
+            if(!Logged)
+                throw new AccessViolationException("Usuário não está logado");
+
+            Logged = false;
+            loggedUser = -99;
+        }
+        catch(Exception ex)
+        {
+            Console.Write(ex.Message);
+            throw;
+        }
+
     }
 
     public int CheckBalance()
