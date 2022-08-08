@@ -24,6 +24,7 @@ public class TestThirdReq
     {        
         var instance = new Trybank();
         instance.Logged = false;
+        instance.Bank[0, 0] = balance;
         Action act = () => instance.CheckBalance();
         act.Should().Throw<AccessViolationException>().WithMessage("Usuário não está logado");
 
