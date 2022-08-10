@@ -11,22 +11,20 @@ public class TestFourthReq
     [InlineData(2, 3)]
     public void TestTransferSucess(int balance, int value)
     {     
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
         var instance = new Trybank();
         instance.Logged = true;
         instance.RegisterAccount(3, 3, 3);
         instance.RegisterAccount(2, 2, 2);
-        instance.loggedUser = 0;
-        instance.Bank[0, 3] = 5;
         instance.Transfer(2, balance, value);
-        instance.Bank[1, 3].Should().Be(3);
+        instance.Bank[1, 3].Should().Be(1);
     }
 
     [Theory(DisplayName = "Deve lançar uma exceção de usuário não logado")]
     [InlineData(0)]
     public void TestTransferWithoutLogin(int value)
     {        
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         instance.Logged = false;
@@ -38,7 +36,7 @@ public class TestFourthReq
     [InlineData(0, 10)]
     public void TestTransferWithoutBalance(int balance, int value)
     {       
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         instance.Logged = true;
