@@ -11,16 +11,20 @@ public class TestThirdReq
     [InlineData(0)]
     public void TestCheckBalanceSucess(int balance)
     {        
-        throw new NotImplementedException();   
-        // var instance = new Trybank();
-        // instance.RegisterAccount();
+        // throw new NotImplementedException();
+        // Não está passando, não sei pq
+        var instance = new Trybank();
+        instance.RegisterAccount(1, 0, 0);
+        instance.Login(1, 0, 0);
+        instance.CheckBalance().Should().Be(balance);
+
     }
 
     [Theory(DisplayName = "Deve lançar uma exceção de usuário não logado")]
     [InlineData(0)]
     public void TestCheckBalanceWithoutLogin(int balance)
     {        
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         instance.Logged = false;
@@ -33,8 +37,8 @@ public class TestThirdReq
     [InlineData(10)]
     public void TestDepositSucess(int value)
     { 
-        throw new NotImplementedException();   
-
+        // throw new NotImplementedException();   
+        // Não está passando, não sei pq
 
         var instance = new Trybank();
         instance.RegisterAccount(2, 11, 25);
@@ -47,7 +51,7 @@ public class TestThirdReq
     [InlineData(10)]
     public void TestDepositWithoutLogin(int value)
     {        
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         instance.Logged = false;
@@ -59,7 +63,7 @@ public class TestThirdReq
     [InlineData(0, 0)]
     public void TestWithdrawSucess(int balance, int value)
     {   
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         instance.Login(0, 0, 0);
@@ -74,10 +78,11 @@ public class TestThirdReq
     [InlineData(10)]
     public void TestWithdrawWithoutLogin(int value)
     {      
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
-        instance.Login(0, 0, 0);
+        instance.RegisterAccount(1, 0, 0);
+        instance.Login(1, 0, 0);
         instance.Logged = true;
         instance.loggedUser = 1;
         Action act = () => instance.Withdraw(value);
@@ -88,7 +93,7 @@ public class TestThirdReq
     [InlineData(0, 0)]
     public void TestWithdrawWithoutBalance(int balance, int value)
     {        
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         instance.Bank[0, 3] = balance;

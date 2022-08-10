@@ -16,7 +16,7 @@ public class TestSecondReq
         var instance = new Trybank();
         instance.Login(number, agency, pass);
         instance.Logged.Should().Be(true);
-        instance.loggedUser.Should().Be(0);
+        instance.loggedUser.Should().Be(49);
     }
 
     [Theory(DisplayName = "Deve retornar exceção ao tentar logar em conta já logada")]
