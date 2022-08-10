@@ -64,7 +64,6 @@ public class Trybank
                     {
                         Logged = true;
                         loggedUser = i;
-                        return;
                     }
                     else 
                     {
