@@ -11,7 +11,44 @@
         "language": "pt-BR"
       },
       "results": [
-      ]
+        {
+          "ruleId": "CS0162",
+          "level": "warning",
+          "message": "Código inacessível detectado",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///home/ubuntu/acc-aggregate-challenges/acc-csharp-07-project-trybank/src/trybank/Trybank.cs",
+                "region": {
+                  "startLine": 59,
+                  "startColumn": 52,
+                  "endLine": 59,
+                  "endColumn": 53
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 2
+          }
+        }
+      ],
+      "rules": {
+        "CS0162": {
+          "id": "CS0162",
+          "shortDescription": "Código inacessível detectado",
+          "defaultLevel": "warning",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0162)",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        }
+      }
     }
   ]
 }

@@ -12,12 +12,8 @@ public class TestThirdReq
     public void TestCheckBalanceSucess(int balance)
     {        
         throw new NotImplementedException();   
-
-        var instance = new Trybank();
-        instance.Login(0, 0, 0);
-        var res = instance.CheckBalance();
-        res.Should().Be(balance);
-
+        // var instance = new Trybank();
+        // instance.RegisterAccount();
     }
 
     [Theory(DisplayName = "Deve lançar uma exceção de usuário não logado")]
@@ -39,13 +35,12 @@ public class TestThirdReq
     { 
         throw new NotImplementedException();   
 
+
         var instance = new Trybank();
-        instance.Login(0, 0, 0);
-        instance.Logged = true;
-        instance.loggedUser = 0;
-        instance.Deposit(10);
-        var res =  instance.Bank[instance.loggedUser, 3];
-        res.Should().Be(value);
+        instance.RegisterAccount(2, 11, 25);
+        instance.Login(2, 11, 25);
+        instance.Deposit(value);
+        instance.CheckBalance().Should().Be(value);
     }
 
     [Theory(DisplayName = "Deve lançar uma exceção de usuário não logado")]

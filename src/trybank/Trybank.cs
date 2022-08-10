@@ -52,20 +52,23 @@ public class Trybank
         try
         {
             if(Logged)
+            {
                 throw new AccessViolationException("Usuário já está logado");
-
+            }
+            
             for (int i = 0; i < Bank.GetLength(0); i += 1)
             {
                 if(Bank[i, 0] == number && Bank[i, 1] == agency)
                 {
-                    if(Bank[i, 2] != pass)
-                    {
-                        throw new ArgumentException("Senha incorreta");
-                    }
-                    else 
+                    if(Bank[i, 2] == pass)
                     {
                         Logged = true;
                         loggedUser = i;
+                        return;
+                    }
+                    else 
+                    {
+                        throw new ArgumentException("Senha incorreta");
                     }
                 }
                 else {
@@ -86,10 +89,13 @@ public class Trybank
         try 
         {
             if(!Logged)
+            {
                 throw new AccessViolationException("Usuário não está logado");
-
-            Logged = false;
-            loggedUser = -99;
+            }
+            else {
+                Logged = false;
+                loggedUser = -99;
+            }
         }
         catch(Exception ex)
         {
