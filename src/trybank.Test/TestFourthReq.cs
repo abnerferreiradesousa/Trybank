@@ -10,7 +10,8 @@ public class TestFourthReq
     [Theory(DisplayName = "Deve transefir um valor com uma conta logada")]
     [InlineData(2, 3)]
     public void TestTransferSucess(int balance, int value)
-    {        
+    {     
+        throw new NotImplementedException();   
         var instance = new Trybank();
         instance.Logged = true;
         instance.RegisterAccount(3, 3, 3);
@@ -25,6 +26,8 @@ public class TestFourthReq
     [InlineData(0)]
     public void TestTransferWithoutLogin(int value)
     {        
+        throw new NotImplementedException();   
+
         var instance = new Trybank();
         instance.Logged = false;
         Action act = () => instance.Transfer(0, 0, value);
@@ -34,7 +37,9 @@ public class TestFourthReq
     [Theory(DisplayName = "Deve lançar uma exceção de saldo insuficiente")]
     [InlineData(0, 10)]
     public void TestTransferWithoutBalance(int balance, int value)
-    {        
+    {       
+        throw new NotImplementedException();   
+
         var instance = new Trybank();
         instance.Logged = true;
         instance.RegisterAccount(3, 3, 3);

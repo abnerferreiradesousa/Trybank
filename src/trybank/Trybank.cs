@@ -2,10 +2,6 @@
 
 public class Trybank
 {
-    // public static void Main(string[] args)  
-    // { 
-        
-    // }
     public bool Logged;
     public int loggedUser;
     
@@ -44,10 +40,10 @@ public class Trybank
 
             Console.Write(Bank[0, 1]);
         }
-        catch (Exception ex)
+        catch (ArgumentException ex)
         {
             Console.Write(ex.Message);
-            throw;
+            throw ex;
         }
     }
 
