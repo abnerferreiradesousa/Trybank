@@ -11,7 +11,7 @@ public class TestSecondReq
     [InlineData(0, 0, 0)]
     public void TestLoginSucess(int number, int agency, int pass)
     {        
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         instance.Login(number, agency, pass);
@@ -23,7 +23,7 @@ public class TestSecondReq
     [InlineData(0, 0, 0)]
     public void TestLoginExceptionLogged(int number, int agency, int pass)
     {      
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         instance.Logged = true;
@@ -32,13 +32,14 @@ public class TestSecondReq
     }
 
     [Theory(DisplayName = "Deve retornar exceção ao errar a senha")]
-    [InlineData(0, 0, 1)]
+    [InlineData(0, 2, 1)]
     public void TestLoginExceptionWrongPass(int number, int agency, int pass)
     {        
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
-        Action act = () => instance.Login(number, agency, pass);
+        instance.RegisterAccount(number, agency, pass);
+        Action act = () => instance.Login(number, agency, 23);
         act.Should().Throw<ArgumentException>().WithMessage("Senha incorreta");
 
     }
@@ -47,7 +48,7 @@ public class TestSecondReq
     [InlineData(1, 0, 0)]
     public void TestLoginExceptionNotFounded(int number, int agency, int pass)
     {        
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         Action act = () => instance.Login(number, agency, pass);
@@ -58,7 +59,7 @@ public class TestSecondReq
     [InlineData(0, 0, 0)]
     public void TestLogoutSucess(int number, int agency, int pass)
     {   
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         instance.Login(number, agency, pass);
@@ -71,7 +72,7 @@ public class TestSecondReq
     [InlineData(1, 1, 1)]
     public void TestLogoutExceptionNotLogged(int number, int agency, int pass)
     {        
-        throw new NotImplementedException();   
+        // throw new NotImplementedException();   
 
         var instance = new Trybank();
         instance.RegisterAccount(number, agency, pass);
